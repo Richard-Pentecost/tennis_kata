@@ -1,6 +1,7 @@
 require_relative '../lib/tennis'
 
 describe 'Tennis' do 
+
   it "initialize a game with player1's game scores being 0" do
     expect(Tennis.new.game_score[:player1]).to eq(0)
   end
@@ -9,9 +10,22 @@ describe 'Tennis' do
     expect(Tennis.new.game_score[:player2]).to eq(0)
   end
 
-  it 'shows this game score of the 2 players' do
+  it 'shows the game score of a new game' do
     tennis = Tennis.new
-    expect(tennis.show_score()).to eq("Player 1: #{tennis[:players1]} - #{tennis[:player2]} :Player 2")
+    expect(tennis.show_score).to eq("Player 1: 0 - 0 :Player 2")
   end
+
+  it 'increases score when a player wins a point to 15-0' do
+    tennis = Tennis.new
+    tennis.win_point('Player 1')
+    expect(tennis.game_score[:player1]).to eq(15)
+  end
+
+  it 'shows the game score after player 1 wins a point' do
+    tennis = Tennis.new
+    tennis.win_point('Player 1')
+    expect(tennis.show_score).to eq("Player 1: 15 - 0 :Player 2")
+  end
+
 
 end
