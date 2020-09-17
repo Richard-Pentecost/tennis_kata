@@ -10,14 +10,15 @@ class Tennis
   end
 
   def win_point(player)
-    score = @game_score[:player1]
+    player == 'Player 1' ? winner = :player1 : winner = :player2
+    score = @game_score[winner]
     case score
     when 0, 15 
-        @game_score[:player1] = score + 15
+        @game_score[winner] = score + 15
     when 30
-        @game_score[:player1] = score + 10
+        @game_score[winner] = score + 10
     else
-        @game_score[:player1] = 0
+        @game_score[winner] = 0
     end
   end
 end
