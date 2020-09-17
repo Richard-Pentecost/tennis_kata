@@ -19,9 +19,17 @@ describe 'Tennis' do
     expect(@tennis.show_score).to eq("Player 1: 0 - 0 :Player 2")
   end
 
-  it 'increases score when a player wins a point to 15-0' do
-    @tennis.win_point('Player 1')
-    expect(@tennis.game_score[:player1]).to eq(15)
+  player_1_scores = {
+    one_point: [1, 15],
+    two_points: [2, 30],
+    three_points: [3, 40],
+    four_points: [4, 0],
+  }
+  player_1_scores.each do |point, data|
+    it 'increases score when player 1 wins a point' do
+      data[0].times { @tennis.win_point('Player 1') }
+      expect(@tennis.game_score[:player1]).to eq(data[1])
+    end
   end
 
   player_1_wins_point = {
