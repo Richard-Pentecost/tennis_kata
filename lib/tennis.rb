@@ -16,6 +16,8 @@ class Tennis
         @game_score[:player1] = score + 15
     when 30
         @game_score[:player1] = score + 10
+    else
+        @game_score[:player1] = 0
     end
   end
 end
