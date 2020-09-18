@@ -15,7 +15,7 @@ describe 'Tennis' do
   end
 
   it 'shows the game score of a new game' do
-    expect(@tennis.show_score).to eq("Player 1: 0 - 0 :Player 2")
+    expect(@tennis.show_game_score).to eq("Player 1: 0 - 0 :Player 2")
   end
 
   player_scores = {
@@ -24,6 +24,7 @@ describe 'Tennis' do
     three_points: [3, 40],
     four_points: [4, 0],
   }
+
   player_scores.each do |point, data|
     it 'increases player 1 score when player 1 wins a point' do
       data[0].times { @tennis.win_point('Player 1') }
@@ -31,9 +32,11 @@ describe 'Tennis' do
     end
   end
 
-  it 'increases player 2 score when player 2 wins a point' do
-    @tennis.win_point('Player 2')
-    expect(@tennis.game_score[:player2]).to eq(15)
+  player_scores.each do |point, data|
+    it 'increases player 2 score when player 2 wins a point' do
+      data[0].times { @tennis.win_point('Player 2') }
+      expect(@tennis.game_score[:player2]).to eq(data[1])
+    end
   end
 
   player_1_wins_point = {
@@ -46,7 +49,21 @@ describe 'Tennis' do
   player_1_wins_point.each do |point, data| 
     it 'shows the correct score after player 1 wins points' do
       data[:points_won].times { @tennis.win_point('Player 1') }
-      expect(@tennis.show_score).to eq(data[:score])
+      expect(@tennis.show_game_score).to eq(data[:score])
+    end
+  end
+
+  player_2_wins_point = {
+    one_point: { points_won: 1, score: "Player 1: 0 - 15 :Player 2" },
+    two_points: { points_won: 2, score: "Player 1: 0 - 30 :Player 2" },
+    three_points: { points_won: 3, score: "Player 1: 0 - 40 :Player 2" },
+    four_points: { points_won: 4, score: "Player 1: 0 - 0 :Player 2" },
+  }
+
+  player_2_wins_point.each do |point, data|
+    it 'shows the correct score after player 2 wins points' do
+      data[:points_won].times { @tennis.win_point('Player 2') }
+      expect(@tennis.show_game_score).to eq(data[:score])
     end
   end
 
