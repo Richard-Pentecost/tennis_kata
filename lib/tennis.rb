@@ -20,7 +20,7 @@ class Tennis
     when 30
         @game_score[winner] = score + 10
     else
-        @set_score[:player1] = 1
+        @set_score[winner] = 1
         @game_score[winner] = 0
     end
   end
