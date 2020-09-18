@@ -67,6 +67,12 @@ describe 'Tennis' do
     end
   end
 
+  it 'shows correct score when both players can win points in a game' do
+    2.times { @tennis.win_point('Player 1') }
+    @tennis.win_point('Player 2')
+    expect(@tennis.show_game_score).to eq("Player 1: 30 - 15 :Player 2")
+  end
+
   it 'initialize the game with the players set scores being 0' do
     expect(@tennis.set_score[:player1]).to eq(0)
     expect(@tennis.set_score[:player2]).to eq(0)
