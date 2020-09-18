@@ -82,4 +82,8 @@ describe 'Tennis' do
     expect(@tennis.set_score[:player2]).to eq(1)
   end
 
+  it 'when a wins 2 games, there set score increases' do
+    8.times { @tennis.win_point('Player 1') }
+    expect(@tennis.set_score[:player1]).to eq(2)
+  end
 end
