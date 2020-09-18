@@ -67,4 +67,10 @@ describe 'Tennis' do
     end
   end
 
+  it 'initialize the game with the players set scores being 0' do
+    expect(@tennis.set_score[:player1]).to eq(0)
+    expect(@tennis.set_score[:player2]).to eq(0)
+  end
+
+
 end
